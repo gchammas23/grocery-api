@@ -4,6 +4,7 @@ import jwt, {JwtPayload} from "jsonwebtoken";
 import config from "../utils/config";
 import db from "../db";
 
+// Add an extension to the Request object to add the userId into it for easier access when the user is logged in
 declare global {
     namespace Express {
         interface Request {
@@ -31,7 +32,7 @@ export const jwtMiddleware = async (req: Request, res: Response, next: NextFunct
                 throw exception;
             }
             //User found and token is valid, we can proceed with the request
-            req.userId = decoded.uid;
+            req.userId = decoded.uid; // Set the userId to be the current user's id to be used in requests
             return next();
         }
         throw exception; // Decoded token does not contain expected payload

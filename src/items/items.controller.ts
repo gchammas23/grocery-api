@@ -19,7 +19,7 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
 export const getUserItems = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const result = await getAllUserItems(req.userId);
-        return res.status(200).send(result);
+        return res.status(200).send({ result });
     } catch (e) {
         next(e);
     }

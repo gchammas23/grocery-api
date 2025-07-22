@@ -1,3 +1,4 @@
+// Declare Exceptions which can be easily used and handled throughout the application
 export class HttpException extends Error {
     public status: number;
     public message: string;
@@ -24,11 +25,5 @@ export class NotFoundException extends HttpException {
 export class UnauthorizedException extends HttpException {
     constructor(message: string = 'Unauthorized') {
         super(401, message);
-    }
-}
-
-export class BadRequestException extends HttpException {
-    constructor(message: string) {
-        super(400, message);
     }
 }

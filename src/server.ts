@@ -16,7 +16,9 @@ app.use('/auth', authRoutes);
 app.use(jwtMiddleware);
 app.use("/items", itemsRoutes);
 
-app.use(errorMiddleware);
+app.use(errorMiddleware); // Ensure to add the error middleware here to handle all thrown errors
+
+// Start the server on specified port
 const port: string | number = config.port;
 app.listen(port, () => {
     console.log(`Server listening on port ${port}`);

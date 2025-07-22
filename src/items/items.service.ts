@@ -1,6 +1,15 @@
 import db from "../db";
 import {NotFoundException} from "../utils/exceptions";
 
+interface Item {
+    id: number;
+    user_id: number;
+    name: string;
+    quantity: number;
+    store: string;
+    created_at: string
+}
+
 interface ItemData {
     name: string;
     quantity: number;
@@ -12,16 +21,16 @@ interface UpdateItem extends ItemData {
     itemId: string;
 }
 
-export const addItemService = async (data: ItemData) => {
+export const addItemService = async (data: ItemData): Promise<void> => {
     return db('items').insert(data);
 }
 
-export const getAllUserItems = async (userId: number) => {
+export const getAllUserItems = async (userId: number): Promise<Item[]> => {
     return db('items').where({ user_id: userId });
 }
 
-export const editItemService = async (data: UpdateItem) => {
-    const updatedItem = await db('items').where({ id: data.itemId, user_id: data.user_id }).update({
+export const editItemService = async (data: UpdateItem): Promise<void> => {
+    const updatedItem: number = await db('items').where({ id: data.itemId, user_id: data.user_id }).update({
         name: data.name,
         quantity: data.quantity,
         store: data.store,
@@ -32,7 +41,7 @@ export const editItemService = async (data: UpdateItem) => {
     }
 }
 
-export const deleteItemService = async (itemId: number, userId: number) => {
+export const deleteItemService = async (itemId: number, userId: number): Promise<void> => {
     // Make sure to only allow user to delete their own items
     const deletedItem = await db('items').where({ id: itemId, user_id: userId }).del();
 
