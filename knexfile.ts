@@ -1,7 +1,7 @@
 import "dotenv/config";
 
 import type { Knex } from "knex";
-import mainConfig from "./src/config";
+import mainConfig from "./src/utils/config";
 
 const config: { [key: string]: Knex.Config } = {
   development: {

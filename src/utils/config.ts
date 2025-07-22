@@ -6,5 +6,6 @@ export default {
         client: 'pg',
         name: process.env.DB_NAME
     },
-    port: process.env.PORT || 3000
+    port: process.env.PORT || 3000,
+    hashSalt: 10,
 }
