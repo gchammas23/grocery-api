@@ -4,6 +4,14 @@ import jwt, {JwtPayload} from "jsonwebtoken";
 import config from "../utils/config";
 import db from "../db";
 
+declare global {
+    namespace Express {
+        interface Request {
+            userId: number;
+        }
+    }
+}
+
 export const jwtMiddleware = async (req: Request, res: Response, next: NextFunction) => {
     try {
         const exception: UnauthorizedException = new UnauthorizedException();
@@ -23,6 +31,7 @@ export const jwtMiddleware = async (req: Request, res: Response, next: NextFunct
                 throw exception;
             }
             //User found and token is valid, we can proceed with the request
+            req.userId = decoded.uid;
             return next();
         }
         throw exception; // Decoded token does not contain expected payload

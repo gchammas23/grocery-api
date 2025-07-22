@@ -5,12 +5,12 @@ import db from "../db";
 import {ConflictException, NotFoundException} from "../utils/exceptions";
 import config from "../utils/config";
 
-interface RegisterData {
+interface AuthData {
     username: string;
     password: string;
 }
 
-export const registrationService = async (data: RegisterData) => {
+export const registrationService = async (data: AuthData) => {
     // Check if user with the same username exists in the DB first
     const usernameCheck = await db('users').where({ username: data.username }).first();
     if (usernameCheck) {
@@ -22,7 +22,7 @@ export const registrationService = async (data: RegisterData) => {
     return db('users').insert({ username: data.username, password: passHash });
 }
 
-export const loginService = async (data: RegisterData) => {
+export const loginService = async (data: AuthData) => {
     const notFoundError: NotFoundException = new NotFoundException('Invalid username or password');
 
     // Check if user is found in DB
