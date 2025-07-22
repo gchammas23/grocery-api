@@ -6,6 +6,8 @@ A simple RESTful service that allows managing grocery items, built using nodejs,
 - **Node.js**
 - **npm**
 - **PostgreSQL** running either remotely or locally
+- **Matplotlib** used for plotting analytics results in the jupyter notebook
+- **psycopg2** used to connect the notebook to the postgresql DB and query it
 
 ## Configuration
 
@@ -23,3 +25,4 @@ A simple RESTful service that allows managing grocery items, built using nodejs,
 ## Additional
 
 You can find a copy of the postman collection that I set up while testing out the APIs I created in this repository
+The jupyter notebook for the python analytics part can also be found in this repository (file name is analytics.ipynb)
