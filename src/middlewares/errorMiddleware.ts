@@ -7,6 +7,7 @@ export const errorMiddleware: ErrorRequestHandler = (err: any ,req: Request, res
             message: err.message,
         });
     } else {
+        console.log(err);
         return res.status(500).send({
             message: 'Server error'
         })

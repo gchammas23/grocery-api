@@ -6,6 +6,10 @@ export default {
         client: 'pg',
         name: process.env.DB_NAME
     },
+    jwt: {
+        secret: process.env.JWT_SECRET,
+        ttl: '1d'
+    },
     port: process.env.PORT || 3000,
     hashSalt: 10,
 }
