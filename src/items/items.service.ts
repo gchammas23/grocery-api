@@ -10,3 +10,7 @@ interface ItemData {
 export const addItemService = async (data: ItemData) => {
     return db('items').insert(data);
 }
+
+export const getAllUserItems = async (userId: number) => {
+    return db('items').where({ user_id: userId });
+}

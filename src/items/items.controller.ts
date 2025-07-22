@@ -1,6 +1,6 @@
 import { Request, Response, NextFunction } from "express";
 import {matchedData, validationResult} from "express-validator";
-import {addItemService} from "./items.service";
+import {addItemService, getAllUserItems} from "./items.service";
 
 export const addItem = async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -11,6 +11,15 @@ export const addItem = async (req: Request, res: Response, next: NextFunction) =
         }
         await addItemService({ ...matchedData(req), user_id: req.userId });
         return res.send({ message: 'Item successfully added' });
+    } catch (e) {
+        next(e);
+    }
+}
+
+export const getUserItems = async (req: Request, res: Response, next: NextFunction) => {
+    try {
+        const result = await getAllUserItems(req.userId);
+        return res.status(200).send(result);
     } catch (e) {
         next(e);
     }
