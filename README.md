@@ -22,6 +22,8 @@ A simple RESTful service that allows managing grocery items, built using nodejs,
 
 5. If everything has been successfully set up, you should see the following message on the terminal ``` Server listening on port 3000 ``` or whatever port is set
 
+6. Some tests were added during the development of these APIs, you can try running these tests after properly setting up the backend by running ``` npm run test ```
+
 ## Additional
 
 You can find a copy of the postman collection that I set up while testing out the APIs I created in this repository
