@@ -34,6 +34,7 @@ describe("Authentication Endpoints", () => {
     })
 })
 
+// Remove the added user from the DB to keep tests from failing
 afterAll(async() => {
     await db('users').where({ username: "test" }).del();
     await db.destroy();
