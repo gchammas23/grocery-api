@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 
 import db from "../db";
-import {ConflictException, NotFoundException} from "../utils/exceptions";
+import {ConflictException, UnauthorizedException} from "../utils/exceptions";
 import config from "../utils/config";
 
 interface AuthData {
@@ -23,18 +23,18 @@ export const registrationService = async (data: AuthData) => {
 }
 
 export const loginService = async (data: AuthData) => {
-    const notFoundError: NotFoundException = new NotFoundException('Invalid username or password');
+    const invalidCredentials: UnauthorizedException = new UnauthorizedException('Invalid username or password');
 
     // Check if user is found in DB
     const userCheck = await db('users').where({ username: data.username }).first();
     if (!userCheck) {
-        throw notFoundError;
+        throw invalidCredentials;
     }
 
     // If user is found, compare provided password with saved hash in DB
     const passwordCheck = await bcrypt.compare(data.password, userCheck.password);
     if (!passwordCheck) {
-        throw notFoundError;
+        throw invalidCredentials;
     }
 
     // If all checks pass, we can generate a JWT and return it to the client
